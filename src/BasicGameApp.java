@@ -80,7 +80,7 @@ public class BasicGameApp implements Runnable {
         while (true) {
             moveThings();
             render();
-            pause(20);
+            pause(21);
         }
     }
 
