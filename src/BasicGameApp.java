@@ -1,12 +1,8 @@
-// ======================= BasicGameApp.java =======================
-// Basic Game Application
-// Version 2
-// Rock / Paper / Scissors / Sword with win screen + sword timer (starts at game start)
-// Sword lasts 3 seconds, and every kill adds +1 second.
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
+import java.awt.print.Paper;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -27,7 +23,7 @@ public class BasicGameApp implements Runnable {
     public Image boulderPic;
     public Image elephantPic;
     public Image winnerPic;
-    public Image streetPic;
+    public Image backgroundPic;
 
     // Game state
     public boolean gameOver = false;
@@ -39,10 +35,9 @@ public class BasicGameApp implements Runnable {
     public int swordTimer; // counts down in frames
 
     // Game objects
-    public Rock rock1;
-    public Paper paper1;
-    public Scissors scissors1;
-    public Sword sword1;
+    public Car car1;
+    public Boulder boulder1;
+    public Elephant elephant1;
 
     public static void main(String[] args) {
         BasicGameApp ex = new BasicGameApp();
@@ -53,27 +48,20 @@ public class BasicGameApp implements Runnable {
         setUpGraphics();
 
         // Load pictures + create objects
-        rockPic = Toolkit.getDefaultToolkit().getImage("rock.jpg");
-        rock1 = new Rock((int)(Math.random()*700)+1,(int)(Math.random()*500)+1);
+        carPic = Toolkit.getDefaultToolkit().getImage("car.png");
+        car1 = new Car((int)(Math.random()*700)+1,(int)(Math.random()*500)+1);
 
-        paperPic = Toolkit.getDefaultToolkit().getImage("paper.png");
-        paper1 = new Paper((int)(Math.random()*700)+1,(int)(Math.random()*500)+1);
+        boulderPic = Toolkit.getDefaultToolkit().getImage("boulder.png");
+        boulder1 = new Boulder ((int)(Math.random()*700)+1,(int)(Math.random()*500)+1);
 
-        scissorsPic = Toolkit.getDefaultToolkit().getImage("scissors.jpg");
-        scissors1 = new Scissors((int)(Math.random()*700)+1,(int)(Math.random()*500)+1);
+        elephantPic = Toolkit.getDefaultToolkit().getImage("elephant.png");
+        elephant1 = new Elephant ((int)(Math.random()*700)+1,(int)(Math.random()*500)+1);
 
-        swordPic = Toolkit.getDefaultToolkit().getImage("sword.jpg");
-        sword1 = new Sword((int)(Math.random()*700)+1,(int)(Math.random()*500)+1);
+        backgroundPic = Toolkit.getDefaultToolkit().getImage("street.png");
 
-        backgroundPic = Toolkit.getDefaultToolkit().getImage("Table.jpg");
+        winnerPic = Toolkit.getDefaultToolkit().getImage("winner.png");
 
-        rockWinPic = Toolkit.getDefaultToolkit().getImage("RockWinScreen.png");
-        paperWinPic = Toolkit.getDefaultToolkit().getImage("PaperWinScreen.png");
-        scissorsWinPic = Toolkit.getDefaultToolkit().getImage("ScissorsWinScreen.png");
-        swordWinPic = Toolkit.getDefaultToolkit().getImage("SwordWinScreen.png");
 
-        // Sword timer starts immediately when game starts:
-        swordTimer = 3 * FRAMES_PER_SECOND; // 3 seconds
     }
 
     public void run() {
@@ -88,17 +76,10 @@ public class BasicGameApp implements Runnable {
         if (!gameOver) {
 
             // Move characters
-            rock1.move();
-            paper1.move();
-            scissors1.move();
-            sword1.move();
+            car1.move();
+            boulder1.move();
+            elephant1.move();
 
-            // Sword timer countdown (starts at game start)
-            if (sword1.isAlive) {
-                swordTimer--;
-                if (swordTimer <= 0) {
-                    sword1.isAlive = false; // stops drawing; hitbox should go away in Sword.move()
-                }
             }
 
             // Collisions
@@ -108,7 +89,7 @@ public class BasicGameApp implements Runnable {
 
     public void crashing() {
         // Rock / Paper / Scissors interactions
-        if (paper1.hitbox.intersects(rock1.hitbox) && rock1.isAlive == true) {
+        if (boulder1.hitbox.intersects(car1.hitbox) && rock1.isAlive == true) {
             System.out.println("Rock/paper hit");
             rock1.isAlive = false;
             paper1.isAlive = true;
