@@ -25,8 +25,8 @@ public class Car {
     public Car(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx =5;
-        dy =5;
+        dx = 5;
+        dy = 5;
         width = 75;
         height = 75;
         isAlive = true;

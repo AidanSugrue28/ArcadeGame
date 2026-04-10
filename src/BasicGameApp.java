@@ -27,7 +27,7 @@ public class BasicGameApp implements Runnable {
 
     // Game state
     public boolean gameOver = false;
-    public String winner   = "";
+    public String winner = "";
 
     // ===== Sword timer settings =====
     // You pause(20), so ~50 frames per second.
@@ -38,6 +38,7 @@ public class BasicGameApp implements Runnable {
     public Car car1;
     public Boulder boulder1;
     public Elephant elephant1;
+}
 
     public static void main(String[] args) {
         BasicGameApp ex = new BasicGameApp();
